@@ -9,5 +9,5 @@ module.exports = {
       backgroundGray: '#f4f6f9',
     },
   },
-  plugins: [],
+  plugins: []
 }
