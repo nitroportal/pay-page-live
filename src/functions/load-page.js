@@ -2,7 +2,9 @@ import axios from "axios";
 
 export default async function loadPage(manageState, merchant_id, token) {
   try {
-    let response = await axios.post(baseUrl, { merchant_id, token });
+    const url = process.env[merchant_id];
+    console.log("url from secret", url);
+    const response = await axios.post(url, { merchant_id, token });
 
     console.log(response);
 
