@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 function LoadingComponent() {
   return (
@@ -9,14 +9,7 @@ function LoadingComponent() {
         fill="none"
         viewBox="0 0 24 24"
       >
-        <circle
-          className="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="#004B7c"
-         strokeWidth="4"
-        ></circle>
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="#004B7c" strokeWidth="4"></circle>
         <path
           className="opacity-100"
           fill="#004B7c"
@@ -24,7 +17,7 @@ function LoadingComponent() {
         ></path>
       </svg>
     </div>
-  );
+  )
 }
 
-export default LoadingComponent;
+export default LoadingComponent

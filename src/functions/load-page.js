@@ -1,19 +1,27 @@
-import axios from "axios";
+// eslint-disable-next-line no-unused-vars
+import u from './utils.js'
+import nitro from './nitro.js'
 
-export default async function loadPage(manageState, merchant_id, token) {
+export default async function loadPage({ setStep, setError, setLoading, setChannels, setAmount }) {
   try {
-    const url = process.env[`REACT_APP_${merchant_id}`];
-    console.log("url from secret: ", url);
-    const response = await axios.post(url, { merchant_id, token });
+    // const { channels } = await nitro.getChannels();
 
-    console.log(response);
+    // if (!u.isNonEmptyArray(channels)) throw Error("Invalid channels");
 
-    manageState.setStep("channels");
+    const { channel_types, amount } = await nitro.getChannels({
+      setError,
+      setLoading
+    })
+
+    if (!u.isNonEmptyArray(channel_types) || !u.isPositiveNumber(amount)) throw Error('Invalid channel_types or amount')
+    setChannels(channel_types)
+    setAmount(amount)
+    setStep('channels')
   } catch (error) {
-    console.log("error loading page");
-    console.log(error);
-    manageState.setError(true);
+    console.log('error loading page')
+    console.log(error)
+    setError(true)
   } finally {
-    manageState.setLoading(false);
+    setLoading(false)
   }
 }

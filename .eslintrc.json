@@ -1,5 +1,6 @@
 {
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": ["eslint:recommended", "plugin:react/recommended", 
+    "plugin:prettier/recommended"],
     "parserOptions": {
       "ecmaVersion": 2021,
       "sourceType": "module",
@@ -14,7 +15,10 @@
     },
     "plugins": ["react"],
     "rules": {
-      "no-undef": "error",
+      "prettier/prettier": "error",
+      "no-unused-vars": "off",
+      "max-len": "off",
+      "curly": "off",
       "react/jsx-uses-vars": "error",
       "react/jsx-uses-react": "error"
     },

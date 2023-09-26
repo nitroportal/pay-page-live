@@ -1,48 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import "./App.css";
+import React, { useEffect, useRef } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
+import { useAppContext } from './AppContext'
+import './App.css'
 
-import ErrorComponent from "./components/ErrorComponent";
-import ChannelsComponent from "./components/ChannelsComponent";
-import LoadingComponent from "./components/LoadingComponent";
+// components
+import ErrorComponent from './components/ErrorComponent'
+import ChannelsComponent from './components/ChannelsComponent'
+import LoadingComponent from './components/LoadingComponent'
 
-import loadPage from "./functions/load-page";
+import loadPage from './functions/load-page'
 
 function App() {
-  const [error, setError] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [selectedChannel, setChannel] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [loading, setLoading] = useState(true);
-  // eslint-disable-next-line no-unused-vars
-  const [step, setStep] = useState(true);
-  const { merchant_id, token } = useParams();
-  const location = useLocation();
+  const { error, setError, loading, step, setStep, setRedirectUrl, setLoading, setChannels, setAmount } =
+    useAppContext()
 
-  const manageState = {
-    setError,
-    setChannel,
-    setStep,
-    setLoading,
-  };
+  const { appId, authToken } = useParams()
+  const { search } = useLocation()
+
+  const loadPageCalledRef = useRef(false)
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const redirect = params.get("redirect"); // Optional
+    try {
+      const params = new URLSearchParams(search)
+      const redirect = params.get('redirect') // Optional
 
-    console.log(redirect);
-    const isJwt = token && token.split(".").length === 3; // Basic JWT validation
+      const isJwt = authToken && authToken.split('.').length === 3 // Basic JWT validation
 
-    if (!merchant_id || !isJwt) {
-      console.log("invalid url");
-      setError(true);
+      if (!appId || !isJwt) throw Error('invalid url')
+
+      sessionStorage.setItem('appId', appId)
+      sessionStorage.setItem('authToken', authToken)
+
+      setRedirectUrl(redirect)
+
+      if (!loadPageCalledRef.current) {
+        //... rest of the code in useEffect
+        loadPage({ setStep, setError, setLoading, setChannels, setAmount })
+        loadPageCalledRef.current = true
+      }
+    } catch (error) {
+      console.log(error)
+      setError(true)
+      setLoading(false)
     }
-
-    if (!error) loadPage(manageState, merchant_id, token);
-
-    // Uncomment the following line if you want to set error state when pathname is 'wow'
-    // if (location.pathname === 'wow') setError(true);
-  }, [merchant_id, token, location]);
+  }, [search, authToken, appId])
 
   return (
     <div className="bg-backgroundGray min-h-screen">
@@ -50,13 +51,13 @@ function App() {
         <LoadingComponent />
       ) : error ? (
         <ErrorComponent />
-      ) : step === "channels" ? (
-        <ChannelsComponent manageState={manageState} />
+      ) : step === 'channels' ? (
+        <ChannelsComponent />
       ) : (
         <ErrorComponent />
       )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

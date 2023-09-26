@@ -1,19 +1,22 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import App from "./App";
-import ErrorComponent from "./components/ErrorComponent";
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { AppProvider } from './AppContext'
+import App from './App'
+import ErrorComponent from './components/ErrorComponent'
 
 function Main() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/:merchant_id/:token" component={App} />
-        <Route path="*">
-          <ErrorComponent />
-        </Route>
-      </Switch>
-    </Router>
-  );
+    <AppProvider>
+      <Router>
+        <Switch>
+          <Route path="/:appId/:authToken" component={App} />
+          <Route path="*">
+            <ErrorComponent />
+          </Route>
+        </Switch>
+      </Router>
+    </AppProvider>
+  )
 }
 
-export default Main;
+export default Main
