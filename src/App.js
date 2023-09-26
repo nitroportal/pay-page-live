@@ -46,7 +46,7 @@ function App() {
   }, [search, authToken, appId])
 
   return (
-    <div className="bg-backgroundGray min-h-screen">
+    <div className="bg-white min-h-screen">
       {loading ? (
         <LoadingComponent />
       ) : error ? (

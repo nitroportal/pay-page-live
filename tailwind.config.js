@@ -4,9 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        backgroundGray: '#f4f6f9'
+        backgroundGray: '#f4f6f9',
+        blu: '#0070BA',
+        blu_med: '#004B7c',
+        blu_dark: '#00253E'
       }
-    }
-  },
-  plugins: [require('@tailwindcss/forms')]
+    },
+    plugins: [require('@tailwindcss/forms')]
+  }
 }

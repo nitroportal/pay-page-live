@@ -39,7 +39,7 @@ export async function wait(ms) {
 }
 
 /**
- * Format cents to dollars (100 = $1.00)
+ * Format paisa to rupee (450 = ₹4.50)
  */
 
 export function fCents(cents) {
@@ -47,6 +47,28 @@ export function fCents(cents) {
     style: 'currency',
     currency: 'INR'
   })
+}
+
+/**
+ * Format paisa to rupee (450 = ₹4.50) (400 = ₹4)
+ */
+
+export function displayCents(cents) {
+  if (cents % 100 === 0) {
+    return (cents / 100).toLocaleString('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      minimumFractionDigits: 0, // No decimal part if the amount is a whole number
+      maximumFractionDigits: 0 // No decimal part if the amount is a whole number
+    })
+  } else {
+    return (cents / 100).toLocaleString('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      minimumFractionDigits: 2, // Display decimal part if the amount has non-zero cents
+      maximumFractionDigits: 2 // Display decimal part if the amount has non-zero cents
+    })
+  }
 }
 
 /**
@@ -207,5 +229,6 @@ export default {
   getRandomItemFromArray,
   isNonEmptyArray,
   isArray,
-  toCents
+  toCents,
+  displayCents
 }
