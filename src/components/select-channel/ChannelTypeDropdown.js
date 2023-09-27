@@ -2,13 +2,14 @@ import React from 'react'
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import { useAppContext } from '../../AppContext'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 /* eslint-disable react/prop-types */
-export default function CustomDropdown({ items, label }) {
+export default function ChannelTypeDropdown({ items, label }) {
   const [selected, setSelected] = useState(items[0] || null)
 
   // Check if there are no items

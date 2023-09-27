@@ -2,7 +2,7 @@
 import u from './utils.js'
 import nitro from './nitro.js'
 
-export default async function loadPage({ setStep, setError, setLoading, setChannels, setAmount }) {
+export default async function loadPage({ setPage, setError, setLoading, setChannels, setAmount, setStep }) {
   try {
     // const { channels } = await nitro.getChannels();
 
@@ -16,7 +16,8 @@ export default async function loadPage({ setStep, setError, setLoading, setChann
     if (!u.isNonEmptyArray(channel_types) || !u.isPositiveNumber(amount)) throw Error('Invalid channel_types or amount')
     setChannels(channel_types)
     setAmount(amount)
-    setStep('channels')
+    setStep(2)
+    setPage('pay')
   } catch (error) {
     console.log('error loading page')
     console.log(error)

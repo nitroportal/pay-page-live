@@ -5,13 +5,13 @@ import './App.css'
 
 // components
 import ErrorComponent from './components/ErrorComponent'
-import ChannelsComponent from './components/ChannelsComponent'
+import PayComponent from './components/PayComponent'
 import LoadingComponent from './components/LoadingComponent'
 
 import loadPage from './functions/load-page'
 
 function App() {
-  const { error, setError, loading, step, setStep, setRedirectUrl, setLoading, setChannels, setAmount } =
+  const { error, setError, loading, setRedirectUrl, setLoading, setChannels, setAmount, page, setPage, setStep } =
     useAppContext()
 
   const { appId, authToken } = useParams()
@@ -34,8 +34,7 @@ function App() {
       setRedirectUrl(redirect)
 
       if (!loadPageCalledRef.current) {
-        //... rest of the code in useEffect
-        loadPage({ setStep, setError, setLoading, setChannels, setAmount })
+        loadPage({ setPage, setError, setLoading, setChannels, setAmount, setStep })
         loadPageCalledRef.current = true
       }
     } catch (error) {
@@ -51,8 +50,8 @@ function App() {
         <LoadingComponent />
       ) : error ? (
         <ErrorComponent />
-      ) : step === 'channels' ? (
-        <ChannelsComponent />
+      ) : page === 'pay' ? (
+        <PayComponent />
       ) : (
         <ErrorComponent />
       )}
