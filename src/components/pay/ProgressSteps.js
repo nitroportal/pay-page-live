@@ -32,12 +32,16 @@ function ProgressSteps() {
   }
 
   return (
-    <div className="flex items-center py-[30px]">
-      {renderDiv(1)}
-      <div className={`${lineClass} ${step > 1 ? 'bg-blu_med' : 'bg-gray-300'}`}></div>
-      {renderDiv(2)}
-      <div className={`${lineClass} ${step > 2 ? 'bg-blu_med' : 'bg-gray-300'}`}></div>
-      {renderDiv(3)}
+    <div className="flex justify-center w-full pb-[36px]">
+      {' '}
+      {/* <- This will center the inner div */}
+      <div className="flex items-center py-[30px] w-[76%]">
+        {renderDiv(1)}
+        <div className={`${lineClass} ${step > 1 ? 'bg-blu_med' : 'bg-gray-300'}`}></div>
+        {renderDiv(2)}
+        <div className={`${lineClass} ${step > 2 ? 'bg-blu_med' : 'bg-gray-300'}`}></div>
+        {renderDiv(3)}
+      </div>
     </div>
   )
 }

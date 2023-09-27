@@ -20,20 +20,8 @@ export default function ChannelSelector() {
     avatar: channel_type_avatars[type] || CurrencyRupeeIcon
   }))
 
-  //   const channelTypeChange = (e) => {
-  //     const selectedTypeId = e.target.value
-  //     const selectedChannelType = channels.find((ch) => ch.type === selectedTypeId)
-  //     setChannelType(selectedChannelType)
-  //   }
-
-  //   const selectChannel = (e) => {
-  //     let SelectedChannel = channelType.options.find((x) => x._id === e.target.value)
-  //     setChannel(e.target.value)
-  //     setStep(2)
-  //   }
-
   return (
-    <form className="space-6" action="#" method="POST">
+    <form className="space-y-8" action="#" method="POST">
       <div>
         <div className="mt-2">
           <ChannelTypeDropdown items={channel_type_options} label="Deposit Type" />
@@ -43,14 +31,6 @@ export default function ChannelSelector() {
         <div className="bg-slate-300">01</div>
         <div className="bg-slate-300">02</div>
         <div className="bg-slate-300">03</div>
-      </div>
-      <div>
-        <a
-          href="#"
-          className="mt-10 block w-full rounded-md bg-blu_dark px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blu_med focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blu"
-        >
-          Big Mama
-        </a>
       </div>
     </form>
   )
