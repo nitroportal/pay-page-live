@@ -2,7 +2,7 @@ import React from 'react'
 
 function LoadingComponent() {
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen pb-[40vh]">
       <svg
         className="custom-spin -ml-1 mr-3 h-10 w-10"
         xmlns="http://www.w3.org/2000/svg"

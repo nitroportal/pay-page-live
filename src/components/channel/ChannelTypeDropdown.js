@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
@@ -10,7 +10,13 @@ function classNames(...classes) {
 
 /* eslint-disable react/prop-types */
 export default function ChannelTypeDropdown({ items, label }) {
-  const [selected, setSelected] = useState(items[0] || null)
+  const { channelType, setChannelType, channels } = useAppContext()
+  const [selected, setSelected] = useState(items[0] || channelType || null)
+
+  useEffect(() => {
+    let channelTypeToUpdate = channels.find((x) => x.type === selected.id)
+    setChannelType(channelTypeToUpdate)
+  }, [selected])
 
   // Check if there are no items
   if (!items || items.length === 0) return null
@@ -20,10 +26,10 @@ export default function ChannelTypeDropdown({ items, label }) {
       {({ open }) => (
         <>
           <Listbox.Label className="block text-sm font-medium leading-6 text-gray-900">{label}</Listbox.Label>
-          <div className="relative mt-2">
-            <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blu sm:text-sm sm:leading-6">
+          <div className="relative mt-2 pb-[40px]">
+            <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blu sm:text-sm sm:leading-6 min-h-[48px]">
               <span className="flex items-center">
-                <selected.avatar className="h-5 w-5" aria-hidden="true" />
+                <selected.avatar className="h-5 w-5 text-blu_med" aria-hidden="true" />
                 <span className="ml-3 block truncate">{selected.name}</span>
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -53,7 +59,7 @@ export default function ChannelTypeDropdown({ items, label }) {
                     {({ selected, active }) => (
                       <>
                         <div className="flex items-center">
-                          <item.avatar className="h-5 w-5" aria-hidden="true" />
+                          <item.avatar className="h-5 w-5 text-blu_med" aria-hidden="true" />
                           <span
                             className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
                           >

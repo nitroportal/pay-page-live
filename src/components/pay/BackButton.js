@@ -13,7 +13,7 @@ export default function BackButton() {
   return (
     step > 1 && (
       <button
-        className="absolute top-[3vw] left-[4.6vw] m-2 p-2 lg:top-[2.4vw] lg:left-[2.44vw]"
+        className="absolute sm:top-[3vw] sm:left-[4.6vw] m-2 p-2 lg:top-[2.4vw] lg:left-[2.44vw]"
         onClick={goBack}
         aria-label="Go Back"
       >

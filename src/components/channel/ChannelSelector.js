@@ -2,12 +2,14 @@ import React from 'react'
 import { useAppContext } from '../../AppContext'
 import u from '../../functions/utils'
 
-import { CurrencyRupeeIcon, AtSymbolIcon, BanknotesIcon } from '@heroicons/react/20/solid'
+import { CurrencyRupeeIcon, BanknotesIcon } from '@heroicons/react/20/solid'
+import UpiIcon from '../icons/UpiIcon'
 
 import ChannelTypeDropdown from './ChannelTypeDropdown'
+import ChannelOptions from './ChannelOptions'
 
 const channel_type_avatars = {
-  upi: AtSymbolIcon,
+  upi: UpiIcon,
   bank_transfer: BanknotesIcon
 }
 
@@ -26,11 +28,7 @@ export default function ChannelSelector() {
         <div className="mt-2">
           <ChannelTypeDropdown items={channel_type_options} label="Deposit Type" />
         </div>
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-slate-300">01</div>
-        <div className="bg-slate-300">02</div>
-        <div className="bg-slate-300">03</div>
+        <ChannelOptions />
       </div>
     </form>
   )

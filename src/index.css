@@ -14,3 +14,17 @@
 .custom-spin {
   animation: custom-spin 0.69s linear infinite;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation-name: fadeIn;
+  animation-duration: 1.2s;
+}

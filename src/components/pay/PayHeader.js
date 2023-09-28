@@ -6,7 +6,7 @@ export default function PayHeader() {
   let { amount } = useAppContext()
 
   return (
-    <div className="rounded-[8px] bg-slate-50 py-[4vw] text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-[40px]">
+    <div className="sm:rounded-[8px] bg-slate-50 py-[4vw] text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-[40px]">
       <div className="mx-auto max-w-xs px-8">
         {/* <p className="text-base font-semibold text-gray-600">Your Deposit</p> */}
         <p className="mt-6 flex items-baseline justify-center gap-x-2">
