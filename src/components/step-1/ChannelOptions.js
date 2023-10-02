@@ -77,7 +77,7 @@ export default function ChannelOptions() {
   return (
     <>
       <div className="block text-sm font-semibold leading-6 text-gray-900">Select an Option</div>
-      <div className={`grid gap-4 pt-[14px] ${channelType.options.length === 1 ? 'grid-cols-1' : 'md:grid-cols-2'}`}>
+      <div className={`grid gap-4 pt-[14px] grid-cols-1`}>
         {channelType?.options?.map((x) => (
           <ChannelOption key={x.channel_id} c={x} />
         ))}
