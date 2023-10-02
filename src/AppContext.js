@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from 'react'
-
 const AppContext = createContext()
 
+import u from './functions/utils'
 // eslint-disable-next-line react/prop-types
 const AppProvider = ({ children }) => {
   const [error, setError] = useState(null)
@@ -15,8 +15,26 @@ const AppProvider = ({ children }) => {
   const [channels, setChannels] = useState([])
   const [channelType, setChannelType] = useState(null)
   const [channel, setChannel] = useState(null)
-
   const [selected_channel, selectChannel] = useState(null)
+  const [toasts, setToasts] = useState([])
+  const [utr, setUtr] = useState('')
+
+  const removeToast = (id) => {
+    setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id))
+  }
+
+  const addToast = (type, message, duration) => {
+    let id = u.UUID()
+    setToasts((prevToasts) => [...prevToasts, { id, type, message }])
+
+    if (u.isPositiveNumber(duration)) {
+      const timerId = setTimeout(() => removeToast(id), duration)
+
+      // Return a cleanup function to clear the timeout if the component unmounts
+      return () => clearTimeout(timerId)
+    }
+  }
+
   const contextValue = {
     error,
     setError,
@@ -41,7 +59,12 @@ const AppProvider = ({ children }) => {
     channelType,
     setChannelType,
     channel,
-    setChannel
+    setChannel,
+    toasts,
+    addToast,
+    removeToast,
+    utr,
+    setUtr
   }
 
   return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>

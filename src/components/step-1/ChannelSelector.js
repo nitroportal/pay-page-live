@@ -2,25 +2,15 @@ import React from 'react'
 import { useAppContext } from '../../AppContext'
 import u from '../../functions/utils'
 
-import { CurrencyRupeeIcon, BanknotesIcon } from '@heroicons/react/20/solid'
-import UpiIcon from '../icons/UpiIcon'
-
 import ChannelTypeDropdown from './ChannelTypeDropdown'
 import ChannelOptions from './ChannelOptions'
 
-const channel_type_avatars = {
-  upi: UpiIcon,
-  bank_transfer: BanknotesIcon
-}
+import channelTypeItem from './channel-type'
 
 export default function ChannelSelector() {
   let { channels } = useAppContext()
 
-  const channel_type_options = channels.map(({ name, type }) => ({
-    name,
-    id: type,
-    avatar: channel_type_avatars[type] || CurrencyRupeeIcon
-  }))
+  const channel_type_options = channels.map((c) => channelTypeItem(c))
 
   return (
     <form className="space-y-8" action="#" method="POST">

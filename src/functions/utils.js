@@ -203,6 +203,10 @@ function toCents(amt) {
   return Math.round(amt * 100)
 }
 
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
 /**
  * Handy utilities functions
  * @module
@@ -230,5 +234,6 @@ export default {
   isNonEmptyArray,
   isArray,
   toCents,
-  displayCents
+  displayCents,
+  classNames
 }

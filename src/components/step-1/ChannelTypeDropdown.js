@@ -4,14 +4,25 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { useAppContext } from '../../AppContext'
 
+import u from '../../functions/utils'
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 /* eslint-disable react/prop-types */
 export default function ChannelTypeDropdown({ items, label }) {
-  const { channelType, setChannelType, channels } = useAppContext()
-  const [selected, setSelected] = useState(items[0] || channelType || null)
+  const { channelType, setChannelType, channels, channel } = useAppContext()
+
+  const [selected, setSelected] = useState(
+    u.isNonEmptyString(channel?.type) ? items.find((item) => item.id === channel.type) || items[0] : items[0]
+  )
+
+  useEffect(() => {
+    if (u.isNonEmptyString(channel?.type)) {
+      setSelected(items.find((item) => item.id === channel.type) || items[0])
+    }
+  }, [channel])
 
   useEffect(() => {
     let channelTypeToUpdate = channels.find((x) => x.type === selected.id)
@@ -25,9 +36,9 @@ export default function ChannelTypeDropdown({ items, label }) {
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block text-sm font-medium leading-6 text-gray-900">{label}</Listbox.Label>
+          <Listbox.Label className="block text-sm font-semibold leading-6 text-gray-900">{label}</Listbox.Label>
           <div className="relative mt-2 pb-[40px]">
-            <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blu sm:text-sm sm:leading-6 min-h-[48px]">
+            <Listbox.Button className="relative w-full rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6 min-h-[48px] cursor-pointer">
               <span className="flex items-center">
                 <selected.avatar className="h-5 w-5 text-blu_med" aria-hidden="true" />
                 <span className="ml-3 block truncate">{selected.name}</span>
@@ -50,8 +61,8 @@ export default function ChannelTypeDropdown({ items, label }) {
                     key={item.id}
                     className={({ active }) =>
                       classNames(
-                        active ? 'bg-blu text-white' : 'text-gray-900',
-                        'relative cursor-default select-none py-2 pl-3 pr-9'
+                        active ? 'bg-blu bg-opacity-5 text-blu_dark' : 'text-gray-900',
+                        'relative cursor-pointer select-none py-2 pl-3 pr-9'
                       )
                     }
                     value={item}
@@ -68,13 +79,8 @@ export default function ChannelTypeDropdown({ items, label }) {
                         </div>
 
                         {selected ? (
-                          <span
-                            className={classNames(
-                              active ? 'text-white' : 'text-blu',
-                              'absolute inset-y-0 right-0 flex items-center pr-4'
-                            )}
-                          >
-                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                          <span className={classNames('text-blu', 'absolute inset-y-0 right-0 flex items-center pr-4')}>
+                            <CheckIcon className="h-3 w-3" aria-hidden="true" />
                           </span>
                         ) : null}
                       </>

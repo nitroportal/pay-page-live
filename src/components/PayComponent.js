@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { useAppContext } from '../AppContext'
 
-import { ArrowLeftIcon } from '@heroicons/react/20/solid'
-
 import ProgressSteps from './pay/ProgressSteps'
 import PayHeader from './pay/PayHeader'
-import ChannelSelector from './channel/ChannelSelector'
 import BackButton from './pay/BackButton'
+
+import ChannelSelector from './step-1/ChannelSelector'
+import UPIPaymentComponent from './step-2/UPIPayComponent'
+import BankTransferPayComponent from './step-2/BankTransferPayComponent'
+import ConfirmComponent from './step-3/ConfirmComponent'
 
 import u from '../functions/utils.js'
 
 export default function PayComponent() {
-  const { setError, step, channels, amount, setStep } = useAppContext()
+  const { setError, step, channels, amount, channel } = useAppContext()
 
   useEffect(() => {
     if (!u.isNonEmptyArray(channels) || !u.isPositiveNumber(amount)) setError(true)
-  }, [channels, step])
+  }, [channels, step, channel])
 
   try {
     const showStepName = () =>
@@ -24,10 +26,14 @@ export default function PayComponent() {
         : step === 2
         ? 'Make Payment'
         : step === 3
-        ? 'Submit Payment'
+        ? 'Submit Confirmation'
         : step === 4
         ? 'Thank You'
         : ''
+
+    // const MakePaymentComponent = {
+    //   upi: <UPIPaymentComponent address={channel.upi_address} />
+    // }[channel.type]
 
     return (
       <div className="bg-white sm:px-[4vw] sm:py-[2.4vw] bg-transparent flex justify-center">
@@ -37,7 +43,10 @@ export default function PayComponent() {
           <div className="p-[4vw] pt-[40px]">
             <h3 className="text-xl text-center font-bold text-gray-900">{showStepName()}</h3>
             <ProgressSteps />
-            {step === 1 && <ChannelSelector />} {/* Render ChannelSelector only if step is 1 */}
+            {step === 1 && <ChannelSelector />}
+            {step === 2 && channel?.type === 'upi' && <UPIPaymentComponent />}
+            {step === 2 && channel?.type === 'bank_transfer' && <BankTransferPayComponent />}
+            {step === 3 && <ConfirmComponent />}
           </div>
         </div>
       </div>

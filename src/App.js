@@ -7,6 +7,7 @@ import './App.css'
 import ErrorComponent from './components/ErrorComponent'
 import PayComponent from './components/PayComponent'
 import LoadingComponent from './components/LoadingComponent'
+import ToastsContainer from './components/common/ToastContainer'
 
 import loadPage from './functions/load-page'
 
@@ -55,6 +56,7 @@ function App() {
       ) : (
         <ErrorComponent />
       )}
+      <ToastsContainer />
     </div>
   )
 }

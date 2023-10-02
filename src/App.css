@@ -28,3 +28,70 @@
   animation-name: fadeIn;
   animation-duration: 1.2s;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  place-items: center;
+  position: relative; /* Optional: If you need to absolutely position any child */
+}
+
+@keyframes fly-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.fly-in-left {
+  animation-name: fly-in-left;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fly-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.fly-in-right {
+  animation-name: fly-in-right;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.corner {
+  width: 20px; /* Adjust as needed */
+  height: 20px; /* Adjust as needed */
+}
+
+.top-left {
+  grid-area: 1 / 1 / 2 / 2;
+}
+.top-right {
+  grid-area: 1 / 3 / 2 / 4;
+}
+.bottom-left {
+  grid-area: 3 / 1 / 4 / 2;
+}
+.bottom-right {
+  grid-area: 3 / 3 / 4 / 4;
+}
+
+.content {
+  grid-area: 2 / 2 / 3 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

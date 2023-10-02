@@ -16,7 +16,7 @@ export default async function loadPage({ setPage, setError, setLoading, setChann
     if (!u.isNonEmptyArray(channel_types) || !u.isPositiveNumber(amount)) throw Error('Invalid channel_types or amount')
     setChannels(channel_types)
     setAmount(amount)
-    setStep(2)
+    setStep(1)
     setPage('pay')
   } catch (error) {
     console.log('error loading page')

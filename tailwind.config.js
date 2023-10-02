@@ -10,6 +10,12 @@ module.exports = {
         blu_dark: '#00253E'
       }
     },
-    plugins: [require('@tailwindcss/forms')]
+    plugins: [require('@tailwindcss/forms')],
+    corePlugins: {
+      transform: true,
+      transformOrigin: true,
+      translate: true,
+      opacity: true
+    }
   }
 }

@@ -6,7 +6,7 @@ function ProgressSteps() {
   const { step, setStep } = useAppContext()
   const [displayedStep, setDisplayedStep] = useState(step)
   const [previousStep, setPreviousStep] = useState(step)
-  const animationDuration = 600 // in ms
+  const animationDuration = 1000 // in ms
 
   useEffect(() => {
     if (step < previousStep) {
@@ -29,32 +29,29 @@ function ProgressSteps() {
   const previousStepClass = 'bg-blu_med text-white cursor-pointer ' + hoverClass
   const lineClass = 'flex-grow h-[2px]'
 
-  const onClickHandler = (stepNumber) => {
-    if (step > stepNumber) setStep(stepNumber)
-  }
   function Circle() {
     return <div className="w-2.5 h-2.5 bg-blu_med rounded-full"></div>
   }
-  const renderDiv = (stepNumber) => {
-    let className
-    let isPreviousStep = stepNumber < step
-    let isAnimating = displayedStep !== step && stepNumber === step
-    let isCurrentStep = displayedStep === stepNumber && !isAnimating
-    let isNextStep = stepNumber > step && !isAnimating
 
-    if (isPreviousStep) {
-      className = previousStepClass
-    } else if (isAnimating || isNextStep) {
-      className = nextStepClass
-    } else if (isCurrentStep) {
-      className = currentStepClass
-    }
+  const onClickHandler = (stepNumber) => {
+    if (step > stepNumber) setStep(stepNumber)
+  }
+
+  const renderDiv = (stepNumber) => {
+    let className = `${commonClass} ${
+      step >= stepNumber
+        ? step === stepNumber && stepNumber !== displayedStep
+          ? currentStepClass
+          : previousStepClass
+        : nextStepClass
+    }`
+
+    const isPreviousStep = step > stepNumber
+    const isCurrentStep = displayedStep === stepNumber
+    const isNextStep = step < stepNumber
 
     return (
-      <div
-        className={`${commonClass} ${className}`}
-        onClick={isNextStep ? undefined : () => onClickHandler(stepNumber)}
-      >
+      <div className={className} onClick={isNextStep ? undefined : () => onClickHandler(stepNumber)}>
         {isPreviousStep ? <CheckIcon className="w-[14px]" /> : isCurrentStep ? <Circle /> : ''}
       </div>
     )
