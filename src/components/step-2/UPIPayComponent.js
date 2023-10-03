@@ -55,7 +55,7 @@ function UPIPaymentComponent() {
             ' hover:ring-blu hover:ring-2 hover:bg-opacity-5 hover:bg-blu_med'
           )}
         >
-          <div onClick={copyToClipboard} className="flex-grow flex p-[1.5vw] justify-center">
+          <div onClick={copyToClipboard} className="flex-grow flex p-[1.5vw] justify-center no-outline">
             <span className="text-sm sm:text-xl font-semibold text-gray-600 group-hover:text-blu">{address}</span>
           </div>
           <div className="flex items-center p-[1.5vw] absolute right-0">

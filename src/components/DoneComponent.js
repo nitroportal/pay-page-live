@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CheckCircleIcon } from '@heroicons/react/24/solid'
 import { useAppContext } from '../AppContext'
 
@@ -6,14 +6,15 @@ import u from '../functions/utils'
 function DoneComponent() {
   const { redirect_url } = useAppContext()
 
-  let actionTxt = 'You may close this wondow'
+  let actionTxt = u.isNonEmptyString(redirect_url) ? 'Redirecting...' : 'You may close this wondow'
 
-  if (u.isNonEmptyString(redirect_url)) {
-    actionTxt = 'Redirecting...'
-    setTimeout(() => {
-      window.location.href = redirect_url
-    }, 2000)
-  }
+  useEffect(() => {
+    if (u.isNonEmptyString(redirect_url)) {
+      setTimeout(() => {
+        window.location.href = redirect_url
+      }, 2000)
+    }
+  }, [redirect_url])
 
   return (
     <div className="mx-auto flex flex-col items-center max-w-2xl py-32 sm:py-48 lg:py-56 fly-in-right">

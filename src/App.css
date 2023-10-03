@@ -100,3 +100,8 @@ input {
   -webkit-appearance: none;
   appearance: none;
 }
+
+.no-outline:focus {
+  outline: none;
+  box-shadow: none;
+}
