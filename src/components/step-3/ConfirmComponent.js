@@ -113,14 +113,12 @@ function ConfirmComponent() {
   return (
     <div className="flex flex-col items-center p-4 pt-0 w-full max-w-lg mx-auto">
       <div className="w-full">
-        <label htmlFor="price" className="block text-sm mb-2 font-semibold leading-6 text-gray-900">
-          UTR Number *
-        </label>
-        <div className="relative mt-2 rounded-md shadow-sm pb-[24px]">
+        <label className="block text-sm mb-2 font-semibold leading-6 text-gray-900">UTR Number *</label>
+        <div className="relative mt-2 pb-[24px]">
           <input
             type="text"
             className="w-full rounded-md border-0 p-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blu sm:leading-6"
-            placeholder="Enter UTR"
+            placeholder="Enter UTR Number"
             value={utr}
             onChange={(e) => setUtr(e.target.value)}
           />
