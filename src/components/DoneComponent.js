@@ -11,8 +11,8 @@ function DoneComponent() {
   useEffect(() => {
     if (u.isNonEmptyString(redirect_url)) {
       setTimeout(() => {
-        window.location.href = redirect_url
         actionTxt = ''
+        window.location.href = redirect_url
       }, 2000)
     }
   }, [redirect_url])
