@@ -95,3 +95,8 @@
   align-items: center;
   justify-content: center;
 }
+
+input {
+  -webkit-appearance: none;
+  appearance: none;
+}

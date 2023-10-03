@@ -117,7 +117,7 @@ function ConfirmComponent() {
         <div className="relative mt-2 pb-[24px]">
           <input
             type="text"
-            className="w-full rounded-md border-0 p-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blu sm:leading-6"
+            className="w-full rounded-md border-1 border-gray-300 p-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blu sm:leading-6 focus:outline-none focus:border-blu focus:shadow-outline-blu"
             placeholder="Enter UTR Number"
             value={utr}
             onChange={(e) => setUtr(e.target.value)}
