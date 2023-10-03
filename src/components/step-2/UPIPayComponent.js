@@ -8,13 +8,13 @@ import { DocumentDuplicateIcon, DevicePhoneMobileIcon, ChevronRightIcon } from '
 import SubmitButton from '../common/SubmitButton'
 
 function UPIPaymentComponent() {
-  let { channel, setStep, addToast } = useAppContext()
+  let { channel, amount, setStep, addToast } = useAppContext()
 
   if (!u.isNonEmptyString(channel?.upi_address)) return
 
-  let address = channel.upi_address
-
-  const upiLink = `upi://pay?pa=${address}`
+  const address = channel.upi_address
+  const amtInr = (amount / 100).toFixed(2)
+  const upiLink = `upi://pay?pa=${address}&am=${amtInr}&cu=INR`
 
   const copyToClipboard = useCallback(() => {
     navigator.clipboard.writeText(address)
@@ -49,13 +49,13 @@ function UPIPaymentComponent() {
         <div
           className={u.classNames(
             'flex items-center px-[40px]', // added 'items-center'
-            'group cursor-pointer relative w-full rounded-md min-h-[48px] mb-6',
+            'group cursor-pointer relative w-full rounded-md min-h-[48px] mb-4',
             'bg-white',
             'ring-1 ring-inset ring-gray-300',
             ' hover:ring-blu hover:ring-2 hover:bg-opacity-5 hover:bg-blu_med'
           )}
         >
-          <div onClick={copyToClipboard} className="flex-grow flex p-[1.5vw] justify-center no-outline">
+          <div onClick={copyToClipboard} className="flex-grow flex p-4 justify-center no-outline">
             <span className="text-sm sm:text-xl font-semibold text-gray-600 group-hover:text-blu">{address}</span>
           </div>
           <div className="flex items-center p-[1.5vw] absolute right-0">
@@ -63,23 +63,24 @@ function UPIPaymentComponent() {
           </div>
         </div>
 
-        <div
-          className={u.classNames(
-            'group cursor-pointer relative flex items-center w-full rounded-md min-h-[48px]',
-            'bg-slate-100 hover:bg-opacity-5 hover:bg-blu_med'
-          )}
-        >
-          <div className="flex-grow flex p-[1.5vw] justify-center items-center">
-            {' '}
-            <DevicePhoneMobileIcon className="h-4 w-5 sm:w-6 sm:h-6 text-blu_dark group-hover:text-blu" />
-            <span className="text-sm sm:text-lg font-semibold pl-2 text-blu_dark group-hover:text-blu">
-              Pay With Your UPI App
-            </span>
+        <a href={upiLink} target="_blank" rel="noopener noreferrer">
+          <div
+            className={u.classNames(
+              'group cursor-pointer relative flex items-center w-full rounded-md min-h-[48px]',
+              'bg-slate-100 hover:bg-opacity-5 hover:bg-blu_med'
+            )}
+          >
+            <div className="flex-grow flex p-4 justify-center items-center">
+              <DevicePhoneMobileIcon className="h-4 w-5 sm:w-6 sm:h-6 text-blu_dark group-hover:text-blu" />
+              <span className="text-sm sm:text-lg font-semibold pl-2 text-blu_dark group-hover:text-blu">
+                Pay With Your UPI App
+              </span>
+            </div>
+            <div className="flex items-center p-[1.5vw] absolute right-0">
+              <ChevronRightIcon className="h-6 w-6 text-blu_dark group-hover:text-blu" />
+            </div>
           </div>
-          <div className="flex items-center p-[1.5vw] absolute right-0">
-            <ChevronRightIcon className="h-6 w-6 text-blu_dark group-hover:text-blu" />
-          </div>
-        </div>
+        </a>
         <SubmitButton onClick={goToNextStep} />
       </div>
     </div>
@@ -87,17 +88,3 @@ function UPIPaymentComponent() {
 }
 
 export default UPIPaymentComponent
-
-{
-  /* <div className="flex flex-col items-center mb-4">
-<a
-  href={upiLink}
-  className={u.classNames(
-    'mt-10 block w-full rounded-md bg-blu p-4 text-center text-sm font-semibold',
-    'text-white shadow-sm hover:bg-blu_med focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blu'
-  )}
->
-  Pay With Your UPI App
-</a>
-</div> */
-}

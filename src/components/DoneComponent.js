@@ -12,6 +12,7 @@ function DoneComponent() {
     if (u.isNonEmptyString(redirect_url)) {
       setTimeout(() => {
         window.location.href = redirect_url
+        actionTxt = ''
       }, 2000)
     }
   }, [redirect_url])

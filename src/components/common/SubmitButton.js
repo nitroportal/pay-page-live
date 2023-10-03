@@ -7,7 +7,7 @@ function SubmitButton({ onClick, className, children }) {
     <div
       onClick={onClick}
       className={u.classNames(
-        'mt-10 block w-full rounded-md bg-blu_med p-4 text-center text-md font-semibold cursor-pointer',
+        'mt-6 block w-full rounded-md bg-blu_med p-4 text-center text-md font-semibold cursor-pointer',
         'text-white shadow-sm hover:bg-blu focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blu',
         className // To allow extra class names to be passed
       )}
