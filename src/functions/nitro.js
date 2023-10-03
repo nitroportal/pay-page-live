@@ -26,7 +26,7 @@ export async function sendRequest(endpoint, body = {}, state) {
     state.setError(true)
     return {}
   } finally {
-    state.setLoading(false)
+    // state.setLoading(false)
   }
 }
 

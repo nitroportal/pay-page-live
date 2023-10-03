@@ -72,7 +72,7 @@ function ProgressSteps() {
   )
 
   return (
-    <div className="flex justify-center w-full pb-[36px]">
+    <div className="flex justify-center w-full pb-4">
       <div className="flex items-center py-[30px] w-[76%]">
         {renderDiv(1)}
         {line(step > 1, step > previousStep)}

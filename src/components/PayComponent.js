@@ -40,7 +40,7 @@ export default function PayComponent() {
         <div className="flex flex-col sm:p-2 bg-white rounded-[12px] sm:ring-1 sm:ring-gray-300 w-full lg:max-w-[720px] min-h-[0px] pb-[40px]">
           <BackButton />
           <PayHeader />
-          <div className="p-[4vw] pt-[40px]">
+          <div className="p-[4vw] pt-8">
             <h3 className="text-xl text-center font-bold text-gray-900">{showStepName()}</h3>
             <ProgressSteps />
             {step === 1 && <ChannelSelector />}

@@ -8,7 +8,7 @@ import u from '../../functions/utils'
 import SubmitButton from '../common/SubmitButton'
 
 function ConfirmComponent() {
-  const { addToast, setError, setLoading, utr, setUtr, channel } = useAppContext()
+  const { addToast, setError, setLoading, utr, setUtr, channel, setPage } = useAppContext()
 
   const [dragging, setDragging] = useState(false)
   const [selectedFile, setSelectedFile] = useState(null)
@@ -67,7 +67,9 @@ function ConfirmComponent() {
         body: formData
       })
 
-      if (!response.ok) throw Error()
+      if (!response.ok) throw Error('file submission response not ok')
+
+      await u.wait(4000)
       return { file_uploaded: true }
     } catch (error) {
       console.error('There was an error uploading the file', error)
@@ -90,21 +92,20 @@ function ConfirmComponent() {
         submitUpload()
       ])
 
-      console.log(submission)
-
-      if (!file_uploaded) {
-        addToast('error', 'Could not upload file', 3000)
+      if (file_uploaded !== true) {
+        addToast('error', 'Error uploading file', 3000)
         return
       }
 
-      // if (!utr_submitted) {
-      //   addToast('error', 'Something went wrong', 3000)
-      //   return
-      // }
+      if (!u.isNonEmptyString(submission?.status)) {
+        addToast('error', 'Something went wrong', 3000)
+        return
+      }
 
-      addToast('success', 'success for testing', 3000)
+      setPage('done')
     } catch (error) {
       console.log('error with handle submit', error)
+      addToast('error', 'Something went wrong')
     } finally {
       setLoading(false)
     }

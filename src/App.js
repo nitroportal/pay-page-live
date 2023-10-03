@@ -8,6 +8,7 @@ import ErrorComponent from './components/ErrorComponent'
 import PayComponent from './components/PayComponent'
 import LoadingComponent from './components/LoadingComponent'
 import ToastsContainer from './components/common/ToastContainer'
+import DoneComponent from './components/DoneComponent'
 
 import loadPage from './functions/load-page'
 
@@ -23,9 +24,9 @@ function App() {
   useEffect(() => {
     try {
       const params = new URLSearchParams(search)
-      const redirect = params.get('redirect') // Optional
+      const redirect = params.get('redirect_url')
 
-      const isJwt = authToken && authToken.split('.').length === 3 // Basic JWT validation
+      const isJwt = authToken && authToken.split('.').length === 3
 
       if (!appId || !isJwt) throw Error('invalid url')
 
@@ -53,6 +54,8 @@ function App() {
         <ErrorComponent />
       ) : page === 'pay' ? (
         <PayComponent />
+      ) : page === 'done' ? (
+        <DoneComponent />
       ) : (
         <ErrorComponent />
       )}

@@ -21,7 +21,7 @@ export default function ChannelOptions() {
         <div className="bg-blu bg-opacity-10 p-2 rounded-[4px]">
           <UpiIcon className="h-6 w-6 text-white" />
         </div>
-        <span className="font-bold text-lg">{address}</span>
+        <span className="font-bold text-sm md:text-md ">{address}</span>
       </div>
     )
   }
