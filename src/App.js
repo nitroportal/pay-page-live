@@ -3,7 +3,6 @@ import { useLocation, useParams } from 'react-router-dom'
 import { useAppContext } from './AppContext'
 import './App.css'
 
-// components
 import ErrorComponent from './components/ErrorComponent'
 import PayComponent from './components/PayComponent'
 import LoadingComponent from './components/LoadingComponent'
