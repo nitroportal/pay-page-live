@@ -19,6 +19,8 @@ export async function sendRequest(endpoint, body = {}, state) {
       }
     })
 
+    //
+
     if (response.status !== 200) throw Error('endpoint did not return 200')
 
     return response?.data || {}
